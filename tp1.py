@@ -61,8 +61,14 @@ def sorting_db(input_db):
     
     return(input_db)
 
+def menu():
+    action = str(input("===== SENSOR MANIPULATION =====\n 1: adding a sensor value\n 2: display logs\n 3: display info from a sensor\n 4: display info between time interval\n 5: display info from the oldest to the newest\n 6: quit\n\nchoice input: "))
+    if action == 'q':
+        return("")
+
 adding_sensor_output([2023, 3, 7], [7, 35, 55], 2, 45, "degrees C")
 adding_sensor_output([2023, 3, 6], [5, 25, 45], 1, 35, "degrees C")
 #print(sort_by_sensor(sensor_db, 1))
 #print(sort_by_time_interval(sensor_db, [0, 0, 0], [0, 0, 0], [9999, 9999, 9999], [99, 99, 99]))
 #print(sorting_db(sensor_db))
+menu()
