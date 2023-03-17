@@ -155,7 +155,7 @@ def main():
         
 ## debug ##
 
-personnes_famille.append(["Déhu", "Laurent", "Homme", "???"])        # parent
+personnes_famille.append(["Jean", "Stéphane", "Homme", "06/06/1944"])        # parent
 personnes_famille.append(["Déhu", "Alexis", "Homme", "21/12/2004"])  # enfant
 liens_parentés.append((1, None))
 liens_parentés.append((None, 0))
