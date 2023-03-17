@@ -67,27 +67,27 @@ def découvrir_descendants(num_personne):
     for info in liens_parentés:
         if info[1] == num_personne:
             num_enfant = info[0]
-            # ajout du numéro de son enfant au tableau temporaire
             temp_tab_descendants.append(num_enfant)
+            # ajout du numéro de son enfant au tableau temporaire
     for num_enfant in temp_tab_descendants:
         découvrir_descendants(num_enfant)
-        # récursivité pour trouver petits-[...] enfants
+        # récursivité pour ajouter petits-[...] enfants
     return(temp_tab_descendants)
 
 
-#  q7
+# q7
 def découvrir_fraterie(num_personne):
     tab_parents = []
     tab_info_fraterie = []
-    for info in liens_parentés:
-        if info[1] == num_personne:
+    for lien in liens_parentés:
+        if lien[1] == num_personne:
+            tab_parents.append(lien[0])
             # récupération des numéros des parents de la personne
-            tab_parents.append(info[0])
-    for info in liens_parentés:
+    for lien2 in liens_parentés:
         for parent in tab_parents:
-            if info[0] == parent and info[1] != num_personne:
-                # pour tout enfant avec même numéro de parent n'ayant pas lui-même
-                num_fraterie = info[1]
+            if lien2[0] == parent and lien2[1] != num_personne:
+                # pour tout enfant avec le même numéro de parent
+                num_fraterie = lien2[1]
                 info_fraterie = personnes_famille[num_fraterie]
                 tab_info_fraterie.append(info_fraterie)
                 # récupération de ses informations pour l'ajouter au tableau
@@ -97,7 +97,7 @@ def découvrir_fraterie(num_personne):
 # q8
 def affichage_ordre_alphabétique(tableau_numéro_personnes):
     temp_tab_info_p = []
-    # j'estime que les numéros sont linéaires & continus (ex: 1->2->3)
+    # j'estime évolution des num linéaire & continu (ex: 1->2->3)
     # j'estime que personnes_famille est le tableau des informations
     num_min = tableau_numéro_personnes[0][0]
     num_max = num_min
@@ -107,10 +107,10 @@ def affichage_ordre_alphabétique(tableau_numéro_personnes):
                 num_min = num[i]
             if num[i] > num_max:
                 num_max = num[i]
-        # on récupère premier & dernier numéro
+            # récupération premier & dernier numéro
     for i in range(num_min, num_max):
         temp_tab_info_p.append(personnes_famille[i])
-    # toutes les informations des personnes sont stockées
+    # stockage informations des personnes
     for i in range(num_min, num_max):
         for j in range(num_min+1, num_max):
             p_observée = personnes_famille[i]
@@ -151,37 +151,8 @@ def affichage_par_age(tableau_num_p):
 # q10
 def main():
     choix = input("\n===== sujet_2 : liens de parentés =====\n\n 1: ajouter une personne\n 2: afficher les informations de toute la famille\n 3: rechercher le numéro d'identifiant d'une personne\n 4: ajouter un lien de parenté\n 5: afficher les ascendants d'une personne\n 6: afficher la descendance d'une personne\n 7: afficher la fraterie d'une personne\n 8: afficher des informations des personnes de la famille par ordre alphabétique\n 9: afficher les informations des personnes de la famille du plus jeune au plus âgé\n 10: quitter\n\nchoix: ")
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                 
-
-
-            
-
-
-
-
+     
+        
 ## debug ##
 
 personnes_famille.append(["Déhu", "Laurent", "Homme", "???"])        # parent
