@@ -7,6 +7,8 @@ positionnement_personnes = []  # tuple d'entiers d'un numéro identifiant & de l
 
 def ajout_personne(nom, prénom, sexe, date_de_naissance):
     tab_personnes.append([nom, prénom, sexe, date_de_naissance])
+    tmp = 100 + len(tab_personnes) - 1
+    positionnement_personnes.append((tmp, len(tab_personnes) - 1))
 
 def affichage_tableau(tableau):
     for ligne in tableau:
@@ -24,6 +26,9 @@ def affichage_personne(numéro):
 tab_personnes.append(["Déhu", "Alexis", "Homme", "21/12/2004"])
 tab_personnes.append(["Jean", "Jean", "Homme", "06/06/1944"])
 
-positionnement_personnes.append((0, 1))
+positionnement_personnes.append((100, 0))
+positionnement_personnes.append((101, 1))
 
+ajout_personne("Déhu", "Justine", "Femme", "06/01/2002")
+ajout_personne("Didier", "Didier", "Homme", "hier")
 print("\nTableau des personnes : ", tab_personnes, "\n\nTableau des positionnements : ", positionnement_personnes)
