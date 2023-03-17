@@ -3,7 +3,7 @@ j'ai l'habitude de travailler en anglais mais je me suis abstenu
 temps prit: environ 2h
 
 j'ai essayé de créer un maximum de variable au lieu d'utiliser
-des paramètres bruts pour une meilleure compréhension
+des paramètres bruts pour une meilleure lecture & compréhension
 
 exercice effectué sans aucune recherche ou aide extérieure
 
@@ -28,16 +28,16 @@ def ajout_personne(nom, prénom, sexe, date_de_naissance):
 
 # q2
 def affichage_tableau(tableau: list()):
-    for personne in tableau:
-        print(personne, "\n")
+    for info_p in tableau:
+        print(info_p, "\n")
 
 
 # q3
 def numéro_personne(nom, prénom):
     cpt = 0
-    for personne in personnes_famille:
+    for info_p in personnes_famille:
         cpt += 1
-        if personne[0] == nom and personne[1] == prénom:
+        if info_p[0] == nom and info_p[1] == prénom:
             return(cpt - 1)
 
 
@@ -49,10 +49,10 @@ def construction_lien_parenté(num_parent, num_enfant):
 # q5, non testée
 temp_tab_ascendants = []
 def découvrir_ascendants(num_personne):
-    for info in liens_parentés:
-        if info[0] == num_personne:
+    for lien in liens_parentés:
+        if lien[0] == num_personne:
             # si numéro de la personne est trouvée en enfant
-            num_parent = info[1]
+            num_parent = lien[1]
             temp_tab_ascendants.append(num_parent)
             # ajout de son parent dans le tableau temporaire
     for num_parent in temp_tab_ascendants:
@@ -150,7 +150,7 @@ def affichage_par_age(tableau_num_p):
 
 # q10
 def main():
-    choix = input("\n===== sujet_2 : liens de parentés =====\n\n 1: ajouter une personne\n 2: afficher les informations de toute la famille\n 3: rechercher les informations d'une personne\n 4: ajouter un lien de parenté\n 5: afficher les ascendants d'une personne\n 6: afficher la descendance d'une personne\n 7: afficher la fraterie d'une personne\n 8: afficher des informations des personnes de la famille par ordre alphabétique\n 9: afficher les informations des personnes de la famille du plus jeune au plus âgé\n 10: quitter\n\nchoix: ")
+    choix = input("\n===== sujet_2 : liens de parentés =====\n\n 1: ajouter une personne\n 2: afficher les informations de toute la famille\n 3: rechercher le numéro d'identifiant d'une personne\n 4: ajouter un lien de parenté\n 5: afficher les ascendants d'une personne\n 6: afficher la descendance d'une personne\n 7: afficher la fraterie d'une personne\n 8: afficher des informations des personnes de la famille par ordre alphabétique\n 9: afficher les informations des personnes de la famille du plus jeune au plus âgé\n 10: quitter\n\nchoix: ")
 
 
     
