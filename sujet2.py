@@ -3,9 +3,14 @@ j'ai l'habitude de travailler en anglais mais je me suis abstenu
 temps prit: environ 2h
 
 j'ai essayé de créer un maximum de variable au lieu d'utiliser
-des paramètres bruts afin de mieux comprendre le programme
+des paramètres bruts pour une meilleure compréhension
 
-je suis disponible pour toute question dessus :)
+exercice effectué sans aucune recherche ou aide extérieure
+
+abréviations : num == numéro(s)
+               p == personne(s)
+
+je suis disponible pour toute question :)
 '''
 
 
@@ -118,7 +123,38 @@ def affichage_ordre_alphabétique(tableau_numéro_personnes):
                         temp_tab_info_p[j], temp_tab_info_p[i]
             # tri alphabétique par noms puis par prénom si nom similaire
     return(temp_tab_info_p)
-                    
+
+
+# q9
+def affichage_par_age(tableau_num_p):
+    temp_tab_info_p = []
+    num_min = tableau_num_p[0][0]
+    num_max = num_min
+    for num in tableau_num_p:
+        for i in range(2):
+            if num[i] < num_min:
+                num_min = num[i]
+            if num[i] > num_max:
+                num_max = num[i]
+    for i in range(num_min, num_max):
+        temp_tab_info_p.append(personnes_famille[i])
+    for i in range(num_min, num_max):
+        for j in range(num_min+1, num_max):
+            p_observée = personnes_famille[i]
+            reste = personnes_famille[j]
+            if reste[3] < p_observée[3]:
+                temp_tab_info_p[i], temp_tab_info_p[j] = \
+                    temp_tab_info_p[j], temp_tab_info_p[i]
+    return(temp_tab_info_p)
+
+
+# q10
+def main():
+    choix = input("\n===== sujet_2 : liens de parentés =====\n\n 1: ajouter une personne\n 2: afficher les informations de toute la famille\n 3: rechercher les informations d'une personne\n 4: ajouter un lien de parenté\n 5: afficher les ascendants d'une personne\n 6: afficher la descendance d'une personne\n 7: afficher la fraterie d'une personne\n 8: afficher des informations des personnes de la famille par ordre alphabétique\n 9: afficher les informations des personnes de la famille du plus jeune au plus âgé\n 10: quitter\n\nchoix: ")
+
+
+    
+    
 
 
 
@@ -137,17 +173,6 @@ def affichage_ordre_alphabétique(tableau_numéro_personnes):
 
 
 
-
-
-    while len(tableau_numéro_personnes) > 0:
-        # pour récupérer tous les numéros, sécurité il n'y en aura plus
-        for i in range(num_min, num_max):
-            for j in range(i+1, num_max):
-                # méthode à la "tri sélection" pour voir si personnes
-                # suivantes doivent être mises avant alphabétiquement
-                p_observée = personnes_famille[i]
-                reste = personnes_famille[j]
-                if reste[0] < p_observée[0]:
 
                  
 
@@ -163,6 +188,8 @@ personnes_famille.append(["Déhu", "Laurent", "Homme", "???"])        # parent
 personnes_famille.append(["Déhu", "Alexis", "Homme", "21/12/2004"])  # enfant
 liens_parentés.append((1, None))
 liens_parentés.append((None, 0))
+
+print(main())
 
 # ajout_personne("Didier", "Didier", "Homme", "hier")
 # print(affichage_tableau(personnes_famille))
