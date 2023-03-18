@@ -152,7 +152,8 @@ def affichage_par_age(tableau_num_p):
 def main():
     choix = input("\n===== sujet_2 : liens de parentés =====\n\n 1: ajouter une personne\n 2: afficher les informations de toute la famille\n 3: rechercher le numéro d'identifiant d'une personne\n 4: ajouter un lien de parenté\n 5: afficher les ascendants d'une personne\n 6: afficher la descendance d'une personne\n 7: afficher la fraterie d'une personne\n 8: afficher des informations des personnes de la famille par ordre alphabétique\n 9: afficher les informations des personnes de la famille du plus jeune au plus âgé\n 10: quitter\n\nchoix: ")
      
-        
+
+
 ## debug ##
 
 personnes_famille.append(["Jean", "Stéphane", "Homme", "06/06/1944"])        # parent
