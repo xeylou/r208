@@ -154,7 +154,7 @@ def affichage_ordre_alphabétique(tableau_numéro_personnes):
     return(temp_tab_info_p)
 
 
-# q9, non passé
+# q9,
 def affichage_par_age(tableau_num_p):
     temp_tab_info_p = []
     num_min = tableau_num_p[0][0]
@@ -168,10 +168,10 @@ def affichage_par_age(tableau_num_p):
     for i in range(num_min, num_max):
         temp_tab_info_p.append(personnes_famille[i])
     for i in range(num_min, num_max):
-        for j in range(num_min+1, num_max):
+        for j in range(i, num_max):
             p_observée = personnes_famille[i]
             reste = personnes_famille[j]
-            if reste[3] < p_observée[3]:
+            if reste[3] > p_observée[3]:
                 temp_tab_info_p[i], temp_tab_info_p[j] = \
                     temp_tab_info_p[j], temp_tab_info_p[i]
     return(temp_tab_info_p)
