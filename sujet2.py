@@ -1,3 +1,5 @@
+import time
+
 '''
 j'ai l'habitude de travailler en anglais mais je me suis abstenu
 temps prit: environ 2h
@@ -46,7 +48,7 @@ def construction_lien_parenté(num_parent, num_enfant):
     liens_parentés.append(num_parent, num_enfant)
 
 
-# q5, non testée
+# q5, non testée, condition d'arrêt?
 temp_tab_ascendants = []
 def découvrir_ascendants(num_personne):
     for lien in liens_parentés:
@@ -61,7 +63,7 @@ def découvrir_ascendants(num_personne):
     return(temp_tab_ascendants)
 
 
-# q6, non testée
+# q6, non testée, je n'ai pas de condition d'arrêt?
 temp_tab_descendants = []
 def découvrir_descendants(num_personne):
     for info in liens_parentés:
@@ -151,6 +153,62 @@ def affichage_par_age(tableau_num_p):
 # q10
 def main():
     choix = input("\n===== sujet_2 : liens de parentés =====\n\n 1: ajouter une personne\n 2: afficher les informations de toute la famille\n 3: rechercher le numéro d'identifiant d'une personne\n 4: ajouter un lien de parenté\n 5: afficher les ascendants d'une personne\n 6: afficher la descendance d'une personne\n 7: afficher la fraterie d'une personne\n 8: afficher des informations des personnes de la famille par ordre alphabétique\n 9: afficher les informations des personnes de la famille du plus jeune au plus âgé\n 10: quitter\n\nchoix: ")
+    match choix:
+        case "1":
+            # ajout_personne(nom, prénom, sexe, date_de_naissance)
+            entree_nom = input("\nQuel est le nom de la personne à ajouter ?\nNom : ")
+            entree_prenom = input("\nQuel est le prénom de la personne à ajouter ?\nPrénom : ")
+            entree_sexe = input("\nQuel est le sexe de la personne à ajouter ?\nSexe : ")
+            entree_bday = input("\nQuel est la date de naissance de la personne à ajouter ?\nDate de naissance : ")
+            ajout_personne(entree_nom, entree_prenom, entree_sexe, entree_bday)
+            print(main())
+        case "2":
+            # def affichage_tableau(tableau: list()):
+            affichage_tableau(personnes_famille)
+            print(main())
+        case "3":
+            # def numéro_personne(nom, prénom):
+            entree_nom = input("\nQuel est le nom de la personne ?\nNom : ")
+            entree_prenom = input("\nQuel est le prénom de la personne ?\nPrénom : ")
+            print([entree_nom, entree_prenom])
+            print(numéro_personne(entree_nom, entree_prenom))
+            print(main())
+        case "4":
+            # def construction_lien_parenté(num_parent, num_enfant):
+            entree_num_parent = input("\nQuel est le nom du parent ?\n Nom du parent : ")
+            entre_num_enfant = input("\nQuel est le numéro de l'enfant ?\nNuméro de l'enfant : ")
+            print(construction_lien_parenté(entree_num_parent, entre_num_enfant))
+            print(main())
+        case "5":
+            # def découvrir_ascendants(num_personne):
+            entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez rechercher les ascendants ?\nNuméro de la personne : ")
+            print(découvrir_ascendants(entree_num_p))
+            print(main())
+        case "6":
+            # def découvrir_descendants(num_personne):
+            entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez rechercher les descendants ?\nNuméro de la personne : ")
+            print(découvrir_descendants(entree_num_p))
+            print(main())
+        case "7":
+            # def découvrir_fraterie(num_personne):
+            entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez connaitre la fraterie ?\nNuméro de la personne : ")
+            print(découvrir_fraterie(entree_num_p))
+            print(main())
+        case "8":
+            # def affichage_ordre_alphabétique(tableau_numéro_personnes):
+            print(affichage_ordre_alphabétique(personnes_famille))
+            print(main())
+        case "9":
+            # def affichage_par_age(tableau_num_p):
+            print(affichage_par_age(liens_parentés))
+            print(main())
+        case "10":
+            exit()
+        case other:
+            print("\n/!\ Veuillez rentrez une valeur valide !\n")
+            time.sleep(3)
+            print(main())
+
      
 
 
@@ -165,6 +223,7 @@ print(main())
 
 # ajout_personne("Didier", "Didier", "Homme", "hier")
 # print(affichage_tableau(personnes_famille))
-# print(numéro_personne("Déhu", "Laurent"))
+# print(numero_personne("Déhu", "Alexis"))
+
 
 #print("\nTableau des personnes : ", personnes_famille, "\n\nTableau des positionnements : ", liens_parentés)
