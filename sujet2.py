@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import time
 
 '''
@@ -48,7 +50,7 @@ def construction_lien_parenté(num_parent, num_enfant):
     liens_parentés.append(num_parent, num_enfant)
 
 
-# q5, non testée, condition d'arrêt?
+# q5, ne fonctionne pas
 temp_tab_ascendants = []
 def découvrir_ascendants(num_personne):
     for lien in liens_parentés:
@@ -56,14 +58,17 @@ def découvrir_ascendants(num_personne):
             # si numéro de la personne est trouvée en enfant
             num_parent = lien[1]
             temp_tab_ascendants.append(num_parent)
-            # ajout de son parent dans le tableau temporaire
+            # ajout de ses parents dans le tableau temporaire
     for num_parent in temp_tab_ascendants:
         découvrir_ascendants(num_parent)
         # récursivité pour trouver chaques parents de ses parents
-    return(temp_tab_ascendants)
+    if temp_tab_ascendants == []:
+        return("Cette personne n'a pas d'ascendants, soit ", temp_tab_ascendants)
+    else:
+        return(temp_tab_ascendants)
 
 
-# q6, non testée, je n'ai pas de condition d'arrêt?
+# q6, ne fonctionne pas
 temp_tab_descendants = []
 def découvrir_descendants(num_personne):
     for info in liens_parentés:
@@ -71,25 +76,27 @@ def découvrir_descendants(num_personne):
             num_enfant = info[0]
             temp_tab_descendants.append(num_enfant)
             # ajout du numéro de son enfant au tableau temporaire
+    cpt = 0
     for num_enfant in temp_tab_descendants:
+        cpt += 1
         découvrir_descendants(num_enfant)
         # récursivité pour ajouter petits-[...] enfants
     return(temp_tab_descendants)
 
 
-# q7
+# q7, fonctionne
 def découvrir_fraterie(num_personne):
     tab_parents = []
     tab_info_fraterie = []
     for lien in liens_parentés:
-        if lien[1] == num_personne:
-            tab_parents.append(lien[0])
+        if lien[0] == num_personne: #  trouvé en enfant
+            tab_parents.append(lien[1]) #  ajout du parent
             # récupération des numéros des parents de la personne
     for lien2 in liens_parentés:
         for parent in tab_parents:
-            if lien2[0] == parent and lien2[1] != num_personne:
+            if lien2[1] == parent and lien2[0] != num_personne:
                 # pour tout enfant avec le même numéro de parent
-                num_fraterie = lien2[1]
+                num_fraterie = lien2[0]
                 info_fraterie = personnes_famille[num_fraterie]
                 tab_info_fraterie.append(info_fraterie)
                 # récupération de ses informations pour l'ajouter au tableau
@@ -99,7 +106,7 @@ def découvrir_fraterie(num_personne):
 # q8
 def affichage_ordre_alphabétique(tableau_numéro_personnes):
     temp_tab_info_p = []
-    # j'estime évolution des num linéaire & continu (ex: 1->2->3)
+    # j'estime évolution des num linéaire et continue (ex: 1->2->3)
     # j'estime que personnes_famille est le tableau des informations
     num_min = tableau_numéro_personnes[0][0]
     num_max = num_min
@@ -110,19 +117,18 @@ def affichage_ordre_alphabétique(tableau_numéro_personnes):
             if num[i] > num_max:
                 num_max = num[i]
             # récupération premier & dernier numéro
-    for i in range(num_min, num_max):
+    for i in range(int(num_min), int(num_max)):
         temp_tab_info_p.append(personnes_famille[i])
+    print("DEBUG1", temp_tab_info_p)
     # stockage informations des personnes
-    for i in range(num_min, num_max):
+    for i in range(int(num_min), int(num_max)):
+        p_observée = personnes_famille[i]
         for j in range(num_min+1, num_max):
-            p_observée = personnes_famille[i]
             reste = personnes_famille[j]
-            if reste[0] < p_observée[0]:
-                temp_tab_info_p[i], temp_tab_info_p[j] = \
-                    temp_tab_info_p[j], temp_tab_info_p[i]
+            if reste[0] < p_observée[0]: #  nom avant dans ordre alphabétique
+                temp_tab_info_p[i], temp_tab_info_p[j] = temp_tab_info_p[j], temp_tab_info_p[i]
             if reste[0] == p_observée[0] and reste[1] < p_observée[1]:
-                    temp_tab_info_p[i], temp_tab_info_p[j] = \
-                        temp_tab_info_p[j], temp_tab_info_p[i]
+                    temp_tab_info_p[i], temp_tab_info_p[j] = temp_tab_info_p[j], temp_tab_info_p[i]
             # tri alphabétique par noms puis par prénom si nom similaire
     return(temp_tab_info_p)
 
@@ -154,26 +160,26 @@ def affichage_par_age(tableau_num_p):
 def main():
     choix = input("\n===== sujet_2 : liens de parentés =====\n\n 1: ajouter une personne\n 2: afficher les informations de toute la famille\n 3: rechercher le numéro d'identifiant d'une personne\n 4: ajouter un lien de parenté\n 5: afficher les ascendants d'une personne\n 6: afficher la descendance d'une personne\n 7: afficher la fraterie d'une personne\n 8: afficher des informations des personnes de la famille par ordre alphabétique\n 9: afficher les informations des personnes de la famille du plus jeune au plus âgé\n 10: quitter\n\nchoix: ")
     match choix:
-        case "1":
-            # ajout_personne(nom, prénom, sexe, date_de_naissance)
+        case "1": #  passé
+            # def ajout_personne(nom, prénom, sexe, date_de_naissance)
             entree_nom = input("\nQuel est le nom de la personne à ajouter ?\nNom : ")
             entree_prenom = input("\nQuel est le prénom de la personne à ajouter ?\nPrénom : ")
             entree_sexe = input("\nQuel est le sexe de la personne à ajouter ?\nSexe : ")
             entree_bday = input("\nQuel est la date de naissance de la personne à ajouter ?\nDate de naissance : ")
             ajout_personne(entree_nom, entree_prenom, entree_sexe, entree_bday)
             print(main())
-        case "2":
+        case "2": #  passé
             # def affichage_tableau(tableau: list()):
             affichage_tableau(personnes_famille)
             print(main())
-        case "3":
+        case "3": #  passé
             # def numéro_personne(nom, prénom):
             entree_nom = input("\nQuel est le nom de la personne ?\nNom : ")
             entree_prenom = input("\nQuel est le prénom de la personne ?\nPrénom : ")
             print([entree_nom, entree_prenom])
             print(numéro_personne(entree_nom, entree_prenom))
             print(main())
-        case "4":
+        case "4": #  passé
             # def construction_lien_parenté(num_parent, num_enfant):
             entree_num_parent = input("\nQuel est le nom du parent ?\n Nom du parent : ")
             entre_num_enfant = input("\nQuel est le numéro de l'enfant ?\nNuméro de l'enfant : ")
@@ -182,17 +188,17 @@ def main():
         case "5":
             # def découvrir_ascendants(num_personne):
             entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez rechercher les ascendants ?\nNuméro de la personne : ")
-            print(découvrir_ascendants(entree_num_p))
+            print(découvrir_ascendants(int(entree_num_p)))
             print(main())
         case "6":
             # def découvrir_descendants(num_personne):
             entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez rechercher les descendants ?\nNuméro de la personne : ")
-            print(découvrir_descendants(entree_num_p))
+            print(découvrir_descendants(int(entree_num_p)))
             print(main())
         case "7":
             # def découvrir_fraterie(num_personne):
             entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez connaitre la fraterie ?\nNuméro de la personne : ")
-            print(découvrir_fraterie(entree_num_p))
+            print(découvrir_fraterie(int(entree_num_p)))
             print(main())
         case "8":
             # def affichage_ordre_alphabétique(tableau_numéro_personnes):
@@ -216,7 +222,10 @@ def main():
 
 personnes_famille.append(["Jean", "Stéphane", "Homme", "06/06/1944"])        # parent
 personnes_famille.append(["Déhu", "Alexis", "Homme", "21/12/2004"])          # enfant
+personnes_famille.append(["Déhu", "Justine", "Femme", "06/01/2003"])         # soeur
 liens_parentés.append((1, None))
+liens_parentés.append((2, None))
+liens_parentés.append((None, 0))
 liens_parentés.append((None, 0))
 
 print(main())
