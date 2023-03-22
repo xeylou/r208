@@ -49,6 +49,29 @@ def numéro_personne(nom, prénom):
 def construction_lien_parenté(num_parent, num_enfant):
     liens_parentés.append(num_parent, num_enfant)
 
+tmp_tab1 = []
+def ascendants(num_p):
+    for lien in liens_parentés:
+        if lien[0] == num_p: #  trouvé en enfant
+            tmp_tab1.append(lien[1])
+            #  ajout numéro du parent
+        else:
+            exit()
+        for num_parent in tmp_tab1:
+            ascendants(num_parent)
+        return(tmp_tab1)
+
+def ascendants2(num_p, tmp_tab1):
+    for lien in liens_parentés:
+        if lien[0] == num_p:
+            tmp_tab1.append(lien[1])
+        else:
+            return(tmp_tab1)
+        for num_parent in tmp_tab1:
+            ascendants2(num_parent, tmp_tab1)
+    return(tmp_tab1)
+
+
 
 # q5, ne fonctionne pas
 temp_tab_ascendants = []
@@ -67,7 +90,6 @@ def découvrir_ascendants(num_personne):
     else:
         return(temp_tab_ascendants)
 
-
 # q6, ne fonctionne pas
 temp_tab_descendants = []
 def découvrir_descendants(num_personne):
@@ -82,7 +104,6 @@ def découvrir_descendants(num_personne):
         découvrir_descendants(num_enfant)
         # récursivité pour ajouter petits-[...] enfants
     return(temp_tab_descendants)
-
 
 # q7, fonctionne
 def découvrir_fraterie(num_personne):
@@ -103,7 +124,7 @@ def découvrir_fraterie(num_personne):
     return(tab_info_fraterie)
 
 
-# q8
+# q8, non passé
 def affichage_ordre_alphabétique(tableau_numéro_personnes):
     temp_tab_info_p = []
     # j'estime évolution des num linéaire et continue (ex: 1->2->3)
@@ -133,7 +154,7 @@ def affichage_ordre_alphabétique(tableau_numéro_personnes):
     return(temp_tab_info_p)
 
 
-# q9
+# q9, non passé
 def affichage_par_age(tableau_num_p):
     temp_tab_info_p = []
     num_min = tableau_num_p[0][0]
@@ -176,8 +197,7 @@ def main():
             # def numéro_personne(nom, prénom):
             entree_nom = input("\nQuel est le nom de la personne ?\nNom : ")
             entree_prenom = input("\nQuel est le prénom de la personne ?\nPrénom : ")
-            print([entree_nom, entree_prenom])
-            print(numéro_personne(entree_nom, entree_prenom))
+            print("\n", numéro_personne(entree_nom, entree_prenom))
             print(main())
         case "4": #  passé
             # def construction_lien_parenté(num_parent, num_enfant):
@@ -188,7 +208,8 @@ def main():
         case "5":
             # def découvrir_ascendants(num_personne):
             entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez rechercher les ascendants ?\nNuméro de la personne : ")
-            print(découvrir_ascendants(int(entree_num_p)))
+            # print(découvrir_ascendants(int(entree_num_p)))
+            print(ascendants2(entree_num_p, tmp_tab1))
             print(main())
         case "6":
             # def découvrir_descendants(num_personne):
@@ -223,10 +244,8 @@ def main():
 personnes_famille.append(["Jean", "Stéphane", "Homme", "06/06/1944"])        # parent
 personnes_famille.append(["Déhu", "Alexis", "Homme", "21/12/2004"])          # enfant
 personnes_famille.append(["Déhu", "Justine", "Femme", "06/01/2003"])         # soeur
-liens_parentés.append((1, None))
-liens_parentés.append((2, None))
-liens_parentés.append((None, 0))
-liens_parentés.append((None, 0))
+liens_parentés.append((1, 0))
+liens_parentés.append((2, 0))
 
 print(main())
 
