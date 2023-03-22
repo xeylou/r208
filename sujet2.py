@@ -61,15 +61,25 @@ def ascendants(num_p):
             ascendants(num_parent)
         return(tmp_tab1)
 
-def ascendants2(num_p, tmp_tab1):
+def ascendants2(num_p, tab_base_parents=[]):
     for lien in liens_parentés:
-        if lien[0] == num_p:
-            tmp_tab1.append(lien[1])
+        if lien[0] == int(num_p):
+            tab_base_parents.append(lien[1])
         else:
-            return(tmp_tab1)
-        for num_parent in tmp_tab1:
-            ascendants2(num_parent, tmp_tab1)
-    return(tmp_tab1)
+            return(tab_base_parents)
+        for num_parent in tab_base_parents:
+            ascendants2(num_parent, tab_base_parents)
+    return(tab_base_parents)
+
+def descendant2(num_p, tab_base_enfants=[]):
+    for lien in liens_parentés:
+        if lien[1] == int(num_p):
+            tab_base_enfants.append(lien[0])
+        else:
+            return(tab_base_enfants)
+        for num_enfant in tab_base_enfants:
+            descendant2(num_enfant, tab_base_enfants)
+    return(tab_base_enfants)
 
 
 
@@ -124,7 +134,7 @@ def découvrir_fraterie(num_personne):
     return(tab_info_fraterie)
 
 
-# q8, non passé
+# q8
 def affichage_ordre_alphabétique(tableau_numéro_personnes):
     temp_tab_info_p = []
     # j'estime évolution des num linéaire et continue (ex: 1->2->3)
@@ -138,13 +148,14 @@ def affichage_ordre_alphabétique(tableau_numéro_personnes):
             if num[i] > num_max:
                 num_max = num[i]
             # récupération premier & dernier numéro
-    for i in range(int(num_min), int(num_max)):
+    for i in range(num_min, num_max+1):
         temp_tab_info_p.append(personnes_famille[i])
-    print("DEBUG1", temp_tab_info_p)
+    # print("DEBUG1", temp_tab_info_p)
     # stockage informations des personnes
-    for i in range(int(num_min), int(num_max)):
+    print("DEBUG1", temp_tab_info_p)
+    for i in range(num_min, num_max+1):
         p_observée = personnes_famille[i]
-        for j in range(num_min+1, num_max):
+        for j in range(num_min+1, num_max+1):
             reste = personnes_famille[j]
             if reste[0] < p_observée[0]: #  nom avant dans ordre alphabétique
                 temp_tab_info_p[i], temp_tab_info_p[j] = temp_tab_info_p[j], temp_tab_info_p[i]
@@ -209,21 +220,21 @@ def main():
             # def découvrir_ascendants(num_personne):
             entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez rechercher les ascendants ?\nNuméro de la personne : ")
             # print(découvrir_ascendants(int(entree_num_p)))
-            print(ascendants2(entree_num_p, tmp_tab1))
+            print(ascendants2(entree_num_p))
             print(main())
         case "6":
             # def découvrir_descendants(num_personne):
             entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez rechercher les descendants ?\nNuméro de la personne : ")
-            print(découvrir_descendants(int(entree_num_p)))
+            print(descendant2(entree_num_p))
             print(main())
         case "7":
             # def découvrir_fraterie(num_personne):
             entree_num_p = input("\nQuel est le numéro de la personne dont vous voulez connaitre la fraterie ?\nNuméro de la personne : ")
-            print(découvrir_fraterie(int(entree_num_p)))
+            print("\n", découvrir_fraterie(int(entree_num_p)))
             print(main())
         case "8":
             # def affichage_ordre_alphabétique(tableau_numéro_personnes):
-            print(affichage_ordre_alphabétique(personnes_famille))
+            print(affichage_ordre_alphabétique(liens_parentés))
             print(main())
         case "9":
             # def affichage_par_age(tableau_num_p):
